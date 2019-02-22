@@ -1,0 +1,62 @@
+<!doctype html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="/socket.io/socket.io.js"></script>
+
+<div class="container">
+	<br>
+	<div class="jumbotron">
+		<h1 class="display-4">Send Message</h1>
+		<br>
+		<input id="name" class="form-control" placeholder="Name">
+		<br>
+		<textArea id="message" class="form-control" placeholder="Message"></textArea>
+		<br>
+		<button id="send" class="btn btn-success">Send</button>
+	</div>
+	<div id="messages">	
+	
+	</div>
+</div>
+
+
+<script>
+       //initialization so that we can make a connection to the same socket.io server
+       //at the same URL that the current page is being hosted
+       var socket = io()
+        $(() => {
+		$("#send").click(()=>{
+		var message = {name: $("#name").val(), message: $("#message").val()}
+		postMessage(message)
+		})
+		
+		getMessages()
+	})
+
+        //an event listener 
+        socket.on('message', addMessage)
+
+        //the $() is a jQuery thing that looks for the element messages
+	//line 17
+	//below is a JS template literals to use jQuery to inject into
+	//our HTML
+	//
+	function addMessage(message){
+		$("#messages").append(`<h4> ${message.name} </h4> <p> ${message.message} </p>`)
+	}
+
+	//we will create a jQuery http GET request to use http ajax request to get messages
+	//from our backend (server.js)
+	//
+	function getMessages(){
+		$.get('http://18.235.28.132:3000/messages', (data) => {
+		data.forEach(addMessage);
+		})
+	}
+
+	function postMessage(message){
+		$.post('http://18.235.28.132:3000/messages',message)
+	}
+</script>

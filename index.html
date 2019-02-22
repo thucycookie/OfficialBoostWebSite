@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<head>
+    <title>BOOST</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<!-- Title -->	
+<div id="intro">
+  <h1>BOOST</h1>
+      <span id="login-signup-buttons">
+        <span 
+          class="loginButton" onClick="window.location='cognito/login_page/login.html'">Log In
+        </span>
+        <button 
+          class="loginButton" onClick="window.location='cognito/register_page/register.html'">Sign Up
+        </button>
+      </span>
+    <h3> Healthcare for tomorrow </h3>
+</div>
+
+<div id="map-intro">
+  <h2>Explore drug prices on map</h2>
+</div>
+
+<div id = "container">
+
+	<!-- Info container for left side-->
+	<div id="div-info-left" style="display: none"><h1>Rating</h1></div>
+
+	<!-- The Map -->
+	<!-- div id = "container" -->
+	<div id="map"></div>
+	<!--/div-->
+
+	<!-- Info container for right side-->
+	<div id="div-info-right" style="display: none"><h1>Review</h1></div>
+
+</div>
+
+<script src="map.js"></script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVNLNO0Kk7kGdFDE4t4zra-V8jSX96pZM&callback=initMap"></script>
+
+
+<div id="footer" class="center">
+    © BOOST 2019 
+</div>
+
+<div class="bottom_footer">
+    <p>Footer</p>
+</div>
+
+<!-- Animated dot -->
+<canvas><script src="dotjs.js"></script></canvas>
+
+
